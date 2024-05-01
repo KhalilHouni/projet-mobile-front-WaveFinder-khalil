@@ -1,0 +1,20 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeScreen">
+
+    <destination
+        android:id="@+id/homeScreen"
+        android:name="com.example.wavefinder.HomeScreen"
+        android:label="Home Screen" />
+
+    <destination
+        android:id="@+id/spotListScreen"
+        android:name="com.example.wavefinder.SpotListScreen"
+        android:label="Spot List Screen" />
+
+    <action
+        android:id="@+id/action_homeScreen_to_spotListScreen"
+        app:destination="@id/spotListScreen" />
+
+</navigation>
