@@ -1,7 +1,7 @@
-
 package com.example.wavefinder
 
 import android.content.Context
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -13,9 +13,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import coil.compose.AsyncImage
+import coil.compose.rememberAsyncImagePainter
+import coil.compose.rememberImagePainter
+import coil.request.ImageRequest
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -71,9 +76,33 @@ fun SpotItem(spot: Spot) {
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
-            Text(text = spot.name)
+            // Load the image painter with Coil
+            val painter = // You can customize the image loading here if needed
+                rememberAsyncImagePainter(
+                    ImageRequest.Builder(LocalContext.current).data(data = spot.imageURL)
+                        .apply(block = fun ImageRequest.Builder.() {
+                            // You can customize the image loading here if needed
+                        }).build()
+                )
 
+            // Display the image using Image composable
+            Image(
+                painter = painter,
+                contentDescription = "Spot Image",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
+                contentScale = ContentScale.Crop // Adjust this as needed
+            )
 
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Text(
+                text = spot.name,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
 
             Text(
                 text = "Emplacement: ${spot.location}",
