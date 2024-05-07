@@ -1,6 +1,7 @@
 package com.example.wavefinder
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,16 +14,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import coil.compose.AsyncImage
-import coil.compose.rememberAsyncImagePainter
-import coil.compose.rememberImagePainter
-import coil.request.ImageRequest
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import org.json.JSONObject
+import coil.compose.rememberImagePainter
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.ui.layout.ContentScale
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+
 
 @Composable
 fun SpotListScreen(navController: NavHostController) {
@@ -57,15 +63,24 @@ fun SpotListScreen(navController: NavHostController) {
 
 fun getSpotsFromJSON(context: Context): List<Spot> {
     val json = readJSONFromAsset(context, "spots.json")
-    val listType = object : TypeToken<List<Spot>>() {}.type
-    return Gson().fromJson(json, listType)
+    val jsonObject = JSONObject(json)
+    val recordsArray = jsonObject.getJSONArray("records")
+
+    val spots = mutableListOf<Spot>()
+    val gson = Gson()
+    for (i in 0 until recordsArray.length()) {
+        val spotJson = recordsArray.getJSONObject(i).toString()
+        val spot = gson.fromJson(spotJson, Spot::class.java)
+        spots.add(spot)
+    }
+    return spots
 }
+
 
 fun readJSONFromAsset(context: Context, fileName: String): String {
     val inputStream = context.assets.open(fileName)
     return inputStream.bufferedReader().use { it.readText() }
 }
-
 @Composable
 fun SpotItem(spot: Spot) {
     Surface(
@@ -76,38 +91,39 @@ fun SpotItem(spot: Spot) {
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
-            // Load the image painter with Coil
-            val painter = // You can customize the image loading here if needed
-                rememberAsyncImagePainter(
-                    ImageRequest.Builder(LocalContext.current).data(data = spot.imageURL)
-                        .apply(block = fun ImageRequest.Builder.() {
-                            // You can customize the image loading here if needed
-                        }).build()
-                )
-
-            // Display the image using Image composable
-            Image(
-                painter = painter,
-                contentDescription = "Spot Image",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp),
-                contentScale = ContentScale.Crop // Adjust this as needed
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Text(
-                text = spot.name,
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Text(
-                text = "Emplacement: ${spot.location}",
-                modifier = Modifier.fillMaxWidth()
-            )
+            spot.surfBreak?.let { surfBreak ->
+                Text(text = surfBreak)
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+            spot.address?.let { address ->
+                Text(text = "Location: $address")
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+            spot.photos?.let { photoUrl ->
+                ImageFromUrl(photoUrl = photoUrl)
+            }
         }
+    }
+}
+
+@Composable
+fun ImageFromUrl(photoUrl: String) {
+    val imagePainter = rememberAsyncImagePainter(
+        model = ImageRequest.Builder(LocalContext.current)
+            .data(photoUrl)
+            .build()
+    )
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .height(200.dp)
+            .width(200.dp)
+    ) {
+        Image(
+            painter = imagePainter,
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
     }
 }

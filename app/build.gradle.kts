@@ -66,7 +66,6 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.palette.coil)
     implementation(libs.coil3.coil)
-    implementation(libs.transformers.coil)
 
 
 

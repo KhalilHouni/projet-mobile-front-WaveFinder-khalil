@@ -1,33 +1,14 @@
-[
-  {
-    "name": "Spot 1",
-    "imageURL": "https://www.voyageursdumonde.fr/voyage-sur-mesure/magazine-voyage/ShowPhoto/1490/0",
-    "location": "Hawaii"
-  },
-  {
-    "name": "Spot 2",
-    "imageURL": "https://media.routard.com/image/15/5/waikiki.1467155.w740.jpg",
-    "location": "California"
-  },
-  {
-    "name": "Spot 3",
-    "imageURL": "https://media.tacdn.com/media/attractions-splice-spp-674x446/07/38/d7/46.jpg",
-    "location": "Australia"
-  },
-  {
-    "name": "Spot 4",
-    "imageURL": "https://img.lemde.fr/2018/12/19/0/0/3520/2346/800/0/75/0/61ec072_cw5oW2ocqA3evW0hij-cwluP.jpg",
-    "location": "Indonesia"
-  },
-  {
-    "name": "Spot 5",
-    "imageURL": "https://media.tacdn.com/media/attractions-splice-spp-674x446/0b/39/5a/b7.jpg",
-    "location": "Ada Tech School"
-  },
-  {
-    "name": "Spot 6",
-    "imageURL": "https://img.lemde.fr/2018/12/19/0/0/3520/2346/800/0/75/0/61ec072_cw5oW2ocqA3evW0hij-cwluP.jpg",
-    "location": "Alternance sil vous plait ?"
-  }
-
-]
+{
+  "records": [
+    {
+      "surfBreak": "Reef Break",
+      "photos": "https://img.lemde.fr/2018/12/19/0/0/3520/2346/800/0/75/0/61ec072_cw5oW2ocqA3evW0hij-cwluP.jpg",
+      "address": "Pipeline, Oahu, Hawaii"
+    },
+    {
+      "surfBreak": "Point Break",
+      "photos": "https://media.tacdn.com/media/attractions-splice-spp-674x446/0b/39/5a/b7.jpg",
+      "address": "Supertubes, Jeffreys Bay, South Africa"
+    }
+  ]
+}
