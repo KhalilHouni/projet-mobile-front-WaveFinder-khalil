@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    kotlin("plugin.serialization")
 }
 
 android {
@@ -17,6 +18,12 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
+
+            kotlinOptions {
+                jvmTarget = "1.8"
+
+                freeCompilerArgs += "-Xopt-in=kotlinx.serialization.ExperimentalSerializationApi"
+            }
         }
     }
 
@@ -66,6 +73,12 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.palette.coil)
     implementation(libs.coil3.coil)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.klaxon)
+
+
+
+
 
 
 

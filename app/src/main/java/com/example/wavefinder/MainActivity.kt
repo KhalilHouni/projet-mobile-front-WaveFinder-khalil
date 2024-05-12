@@ -4,7 +4,16 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -52,8 +61,8 @@ fun HomeScreen(navController: NavHostController) {
         // Bannière colorée avec du texte et logo
         Surface(
             modifier = Modifier.fillMaxWidth(),
-            color = Color(0xFF87CEEB), // Couleur de la bannière
-            contentColor = Color.Black, // Couleur du texte
+            color = Color(0xFF87CEEB), // Couleur  bannière
+            contentColor = Color.Black, // Couleur texte
         ) {
             Row(
                 modifier = Modifier
@@ -62,9 +71,9 @@ fun HomeScreen(navController: NavHostController) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Find a spot to ride !",
+                    text = " hello Find a spot to ride !",
                     style = MaterialTheme.typography.headlineMedium,
-                    modifier = Modifier.weight(1f) // Pour centrer le texte
+                    modifier = Modifier.weight(1f) // Pour centrer texte
                 )
 
                 Image(
@@ -110,3 +119,9 @@ fun HomeScreen(navController: NavHostController) {
         )
     }
 }
+
+data class Spot(
+    val surfBreak: String, // Comme il peut y avoir plusieurs types de spots, on utilise une liste de String
+    val photos: List<String>, // Comme il peut y avoir plusieurs photos, on utilise une liste de String pour les URL des photos
+    val address: String
+)
