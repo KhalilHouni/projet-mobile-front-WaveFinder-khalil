@@ -1,3 +1,6 @@
+/*
+//this class was used for step 5 with the spot.json file in the assets folder. Please keep it commented for the Api calls
+
 // To parse the JSON, install Klaxon and do:
 //
 //   val welcome = Welcome.fromJson(jsonString)
@@ -81,3 +84,4 @@ data class Full (
     val width: Long,
     val height: Long
 )
+*/

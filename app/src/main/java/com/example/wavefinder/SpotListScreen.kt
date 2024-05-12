@@ -1,3 +1,4 @@
+/*
 package com.example.wavefinder
 
 import android.content.Context
@@ -105,7 +106,9 @@ fun SpotItem(spot: Spot) {
             )
 
             Button(
-                onClick = { /* Handle button click */ },
+                onClick = { */
+/* Handle button click *//*
+ },
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             ) {
                 Text("Voir les détails")
@@ -136,3 +139,4 @@ fun ImageFromUrl(photoUrl: String, modifier: Modifier = Modifier) {
         )
     }
 }
+*/

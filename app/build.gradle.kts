@@ -75,6 +75,8 @@ dependencies {
     implementation(libs.coil3.coil)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.klaxon)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 
 
 

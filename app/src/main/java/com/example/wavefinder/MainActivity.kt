@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -21,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -43,7 +45,8 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     NavHost(navController, startDestination = "homeScreen") {
                         composable("homeScreen") { HomeScreen(navController) }
-                        composable("spotListScreen") { SpotListScreen(navController) }
+                       // composable("spotListScreen") { SpotListScreen(navController) }
+                        composable("apiTest") { ApiTest() }
                     }
                 }
             }
@@ -71,7 +74,7 @@ fun HomeScreen(navController: NavHostController) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = " hello Find a spot to ride !",
+                    text = "Find a spot to ride !",
                     style = MaterialTheme.typography.headlineMedium,
                     modifier = Modifier.weight(1f) // Pour centrer texte
                 )
@@ -79,7 +82,10 @@ fun HomeScreen(navController: NavHostController) {
                 Image(
                     painter = painterResource(id = R.drawable.wavefinderlogo),
                     contentDescription = "WaveFinder Logo",
-                    modifier = Modifier.size(80.dp)
+                    modifier = Modifier
+                        .size(80.dp)
+                        .padding(4.dp)
+                        .clip(shape = RoundedCornerShape(8.dp))
                 )
             }
         }
@@ -97,7 +103,10 @@ fun HomeScreen(navController: NavHostController) {
             Image(
                 painter = painterResource(id = R.drawable.homepic),
                 contentDescription = "WaveFinder Background Image",
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(20.dp)
+                    .clip(shape = RoundedCornerShape(20.dp))
             )
         }
 
@@ -108,10 +117,17 @@ fun HomeScreen(navController: NavHostController) {
         ) {
             Text("Clique pour voir la liste des spots !")
         }
+        //Bouton pour tester les appels Apis
+        Button(
+            onClick = { navController.navigate("apiTest") },
+            modifier = Modifier.padding(vertical = 16.dp)
+        ) {
+            Text("Clique pour Tester l'api !")
+        }
 
-        // Text en bas avec "créer par Khalil, Adrien, Maud, Sabri"
+        // Text en bas avec "créer par Khalil "
         Text(
-            text = "Créé par Khalil, Adrien, Maud, Sabri",
+            text = "Créé par Khalil Houni",
             modifier = Modifier
                 .padding(vertical = 16.dp)
                 .fillMaxWidth(),
@@ -120,8 +136,12 @@ fun HomeScreen(navController: NavHostController) {
     }
 }
 
+
+
+/* test sans les models de l'api
 data class Spot(
+    val destination: String,
     val surfBreak: String, // Comme il peut y avoir plusieurs types de spots, on utilise une liste de String
     val photos: List<String>, // Comme il peut y avoir plusieurs photos, on utilise une liste de String pour les URL des photos
     val address: String
-)
+)*/
