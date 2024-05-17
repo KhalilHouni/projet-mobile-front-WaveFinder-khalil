@@ -1,5 +1,6 @@
 package com.example.wavefinder
 
+import AddSpot
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -47,6 +48,7 @@ class MainActivity : ComponentActivity() {
                         composable("homeScreen") { HomeScreen(navController) }
                        // composable("spotListScreen") { SpotListScreen(navController) }
                         composable("apiTest") { ApiTest() }
+                        composable("addSpot") { AddSpot(navController) }
                     }
                 }
             }
@@ -112,10 +114,10 @@ fun HomeScreen(navController: NavHostController) {
 
         // Bouton pour naviguer vers la liste des spots
         Button(
-            onClick = { navController.navigate("spotListScreen") },
+            onClick = { navController.navigate("addSpot") },
             modifier = Modifier.padding(vertical = 16.dp)
         ) {
-            Text("Clique pour voir la liste des spots !")
+            Text("Ajoute un Spot (En cours...)")
         }
         //Bouton pour tester les appels Apis
         Button(
@@ -125,9 +127,9 @@ fun HomeScreen(navController: NavHostController) {
             Text("Clique pour Tester l'api !")
         }
 
-        // Text en bas avec "créer par Khalil "
+        // Text en bas avec "créer par machin et machin... "
         Text(
-            text = "Créé par Khalil Houni",
+            text = "Créé par un groupe de personne",
             modifier = Modifier
                 .padding(vertical = 16.dp)
                 .fillMaxWidth(),

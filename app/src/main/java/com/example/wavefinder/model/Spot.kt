@@ -1,10 +1,12 @@
 package com.example.wavefinder.model
 
-import kotlinx.serialization.Serializable
+import com.google.gson.annotations.SerializedName
 
-@Serializable
 data class Spot(
-    val id: String,
-    val createdTime: String,
-    val fields: Fields
+    @SerializedName("id") val id: String,
+    @SerializedName("surfBreak") val surfBreak: List<String>,
+    @SerializedName("address") val address: String,
+    @SerializedName("photos") val photos: List<Photo>
 )
+
+

@@ -15,6 +15,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -24,35 +25,34 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.wavefinder.apiservice.ApiClient
+import com.example.wavefinder.model.Spot
 import com.example.wavefinder.model.SurfResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch as launch1
-
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun ApiTest() {
-    val scope = remember { CoroutineScope(Dispatchers.IO) }
     val spots = remember { mutableStateListOf<SurfResponse.Record>() }
 
-    // Récupérer les données de l'API
-    scope.launch1 {
+    LaunchedEffect(Unit) {
         try {
             val response = ApiClient.apiService.getSurfSpots()
-            spots.addAll(response.records)
+            spots.addAll(response)
             Log.d("API Hello", "Does the Api works ?")
         } catch (e: Exception) {
             Log.e("API_ERROR", "Error fetching data: ${e.message}")
         }
     }
 
-    // Afficher les données dans une LazyColumn
     LazyColumn {
         items(spots) { record ->
             SpotItem(record = record)
         }
     }
 }
+
+
 
 @Composable
 fun SpotItem(record: SurfResponse.Record) {
