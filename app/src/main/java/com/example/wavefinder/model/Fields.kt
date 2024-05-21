@@ -11,7 +11,6 @@ data class Fields(
     val geocode: String,
     val surfBreak: List<String>,
     val magicSeaweedLink: String,
-    val photos: List<Photo>,
     val peakSurfSeasonBegins: String,
     val destinationStateCountry: String,
     val address: String

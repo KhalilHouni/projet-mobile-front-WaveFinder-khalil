@@ -1,3 +1,5 @@
+@file:Suppress("SpellCheckingInspection")
+
 package com.example.wavefinder
 
 import AddSpot
@@ -129,7 +131,7 @@ fun HomeScreen(navController: NavHostController) {
 
         // Text en bas avec "créer par machin et machin... "
         Text(
-            text = "Créé par un groupe de personne",
+            text = "Créé par un Khalil Houni",
             modifier = Modifier
                 .padding(vertical = 16.dp)
                 .fillMaxWidth(),
