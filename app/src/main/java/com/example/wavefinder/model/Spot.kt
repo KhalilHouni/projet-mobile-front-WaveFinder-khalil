@@ -6,7 +6,7 @@ data class Spot(
 )
 
 data class SpotRecord(
-    val id: String,
+    val id: SpotFields,
     val fields: SpotFields,
     val createdTime: String
 )
